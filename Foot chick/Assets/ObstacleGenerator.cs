@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    public GameObject[] Obstacles;
-    public float speed = 1;
+    public GameObject[] Obstacles, Items;
+    public float speed;
     public float speedAum;
     public Camera cam;
     public bool gameStarted;
@@ -28,6 +28,7 @@ public class ObstacleGenerator : MonoBehaviour
             if (lastObject.transform.position.z < 5)
             {
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
+                if (SummonItem() == 1) Instantiate(Items[0], gameObject.transform);
             }
         }
         if (Input.touchCount > 0)
@@ -37,6 +38,8 @@ public class ObstacleGenerator : MonoBehaviour
             {
                 gameStarted = true;
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
+                if (SummonItem() == 1) Instantiate(Items[0], gameObject.transform);
+
             }
         }
     }
@@ -52,5 +55,14 @@ public class ObstacleGenerator : MonoBehaviour
         
         
         return Random.Range(0, Obstacles.Length); 
+    }
+
+    int SummonItem()
+    {
+        //0-74 Nothing
+        //75-99 Ball
+        int result = Random.Range(0, 100);
+        if (result > 74) return 1;
+        return 0; ///////////////////////////////////
     }
 }

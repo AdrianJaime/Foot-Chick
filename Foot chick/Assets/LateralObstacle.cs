@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LateralObstacle : MonoBehaviour
 {
-    float width, height;
+    public float width, height;
     Camera cam;
     ObstacleGenerator obsData;
     // Start is called before the first frame update
@@ -17,8 +17,8 @@ public class LateralObstacle : MonoBehaviour
         float Sizey = cam.orthographicSize * 2;
         float Sizex = Sizey * Screen.width / Screen.height;
 
-        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width : -width , 0, 15);
-        gameObject.transform.localScale = new Vector3(Sizex , Sizey, gameObject.transform.localScale.z);
+        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width : -width , height * 4, 15);
+        gameObject.transform.localScale = new Vector3(Sizex/2 , Sizey/2, gameObject.transform.localScale.z);
 
 
     }

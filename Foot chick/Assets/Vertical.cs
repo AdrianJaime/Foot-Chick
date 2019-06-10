@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vertical : MonoBehaviour
 {
-    float width, height;
+    public float width, height;
     Camera cam;
     ObstacleGenerator obsData;
     // Start is called before the first frame update
@@ -16,8 +16,10 @@ public class Vertical : MonoBehaviour
         height = cam.ScreenToWorldPoint(new Vector3(Screen.height, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).y;
         float Sizey = cam.orthographicSize * 2;
         float Sizex = Sizey * Screen.width / Screen.height;
-        gameObject.transform.position = new Vector3(0, Random.Range(0, 2) == 0 ? height : -height, 15);
-        gameObject.transform.localScale = new Vector3(Sizex , Sizey , gameObject.transform.localScale.z);
+        int rand = Random.Range(0, 2);
+        gameObject.transform.position = new Vector3(0, rand == 0 ? height : -height, 15);
+        if (rand == 0) gameObject.transform.Rotate(new Vector3(180, 0, 0));
+        gameObject.transform.localScale = new Vector3(Sizex/150 , Sizey/150 , gameObject.transform.localScale.z);
 
 
     }

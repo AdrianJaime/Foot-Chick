@@ -40,6 +40,7 @@ public class LifeManager : MonoBehaviour
     {
         lifes = 3;
         for (int i = 1; i < 4; i++) GameObject.Find("Heart " + i).GetComponent<Image>().sprite = fullLife;
+        GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
         GameObject.Find("Restart").SetActive(false);
     }
 }
