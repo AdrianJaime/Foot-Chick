@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateralObstacle : MonoBehaviour
+public class Vertical : MonoBehaviour
 {
     float width, height;
     Camera cam;
@@ -14,8 +14,8 @@ public class LateralObstacle : MonoBehaviour
         cam = obsData.cam;
         width = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).x;
         height = cam.ScreenToWorldPoint(new Vector3(Screen.height, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).y;
-        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width - 5 : -width + 5 , 0, 15);
-        gameObject.transform.localScale = new Vector3(obsData.lateralSize.x, obsData.lateralSize.y, gameObject.transform.localScale.z);
+        gameObject.transform.position = new Vector3(0, Random.Range(0, 2) == 0 ? height - 5 : -height + 5, 15);
+        gameObject.transform.localScale = new Vector3(obsData.verticalSize.x, obsData.verticalSize.y, gameObject.transform.localScale.z);
 
 
     }
@@ -24,12 +24,11 @@ public class LateralObstacle : MonoBehaviour
     void Update()
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed);
-        if(gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
+        if (gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
     }
 
     private void OnBecameInvisible()
     {
-        if(gameObject != obsData.lastObject)
-            Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

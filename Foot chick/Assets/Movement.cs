@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
     void SetLimits()
     {
         limits = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 4 * 3, dist));
-        cameraLimits = new Vector3(limits.x / 3, limits.y / 3, 0);
+        cameraLimits = new Vector3(limits.x / 5, limits.y / 5, 0);
         Debug.Log(limits);
         Debug.Log(cameraLimits);
     }
@@ -63,8 +63,8 @@ public class Movement : MonoBehaviour
             gameObject.transform.position = new Vector3(limits.x - 0.01f, gameObject.transform.position.y, gameObject.transform.position.z);
         if (gameObject.transform.position.x < -limits.x)
             gameObject.transform.position = new Vector3(-limits.x + 0.01f, gameObject.transform.position.y, gameObject.transform.position.z);
-        if (gameObject.transform.position.y > limits.y)
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, limits.y - 0.01f, gameObject.transform.position.z);
+        if (gameObject.transform.position.y > limits.y - 0.5f)
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, limits.y - 0.51f, gameObject.transform.position.z);
         if (gameObject.transform.position.y < -limits.y)
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, -limits.y + 0.01f, gameObject.transform.position.z);
 

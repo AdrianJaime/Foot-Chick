@@ -6,13 +6,12 @@ public class MovingBackground : MonoBehaviour
 {
     bool gameStarted, right = false;
     public float smooth, dist;
-    Camera cam;
+    public Camera cam;
     float time;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
         dist = Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z);
     }
 
@@ -29,7 +28,7 @@ public class MovingBackground : MonoBehaviour
             time += Time.deltaTime;
             if(right) gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, cam.ScreenToWorldPoint(new Vector3(Screen.width, cam.WorldToScreenPoint(gameObject.transform.position).y, dist)), time * smooth);
             else gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, cam.ScreenToWorldPoint(new Vector3(0, cam.WorldToScreenPoint(gameObject.transform.position).y, dist)), time * smooth);
-            if (time * smooth > 0.01)
+            if (time * smooth > 0.001)
             {
                 ResetTravel();
             }
