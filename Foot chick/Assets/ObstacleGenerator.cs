@@ -6,8 +6,9 @@ public class ObstacleGenerator : MonoBehaviour
 {
     public GameObject[] Obstacles;
     public float speed = 1;
+    public float speedAum;
     public Camera cam;
-    private bool gameStarted;
+    public bool gameStarted;
     public GameObject lastObject;
 
     public Vector2 lateralSize, verticalSize;
@@ -21,19 +22,18 @@ public class ObstacleGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameStarted)
+        {
+            speed += Time.deltaTime * speedAum;
+            if (lastObject.transform.position.z < 5)
+            {
+                lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
+            }
+        }
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
-            if (gameStarted)
-            {
-                speed += Time.deltaTime * 0.1f;
-                if (lastObject.transform.position.z < 5)
-                {
-                    lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
-                }
-            }
-            if (touch.phase == TouchPhase.Began && !gameStarted)
+            if (touch.phase == TouchPhase.Began && !GameObject.Find("Restart") && !gameStarted)
             {
                 gameStarted = true;
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);

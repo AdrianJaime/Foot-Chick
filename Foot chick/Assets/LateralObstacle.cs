@@ -14,8 +14,11 @@ public class LateralObstacle : MonoBehaviour
         cam = obsData.cam;
         width = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).x;
         height = cam.ScreenToWorldPoint(new Vector3(Screen.height, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).y;
-        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width - 5 : -width + 5 , 0, 15);
-        gameObject.transform.localScale = new Vector3(obsData.lateralSize.x, obsData.lateralSize.y, gameObject.transform.localScale.z);
+        float Sizey = cam.orthographicSize * 2;
+        float Sizex = Sizey * Screen.width / Screen.height;
+
+        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width : -width , 0, 15);
+        gameObject.transform.localScale = new Vector3(Sizex , Sizey, gameObject.transform.localScale.z);
 
 
     }
@@ -25,11 +28,7 @@ public class LateralObstacle : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed);
         if(gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
+        if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject) Destroy(gameObject);
     }
 
-    private void OnBecameInvisible()
-    {
-        if(gameObject != obsData.lastObject)
-            Destroy(gameObject);
-    }
 }

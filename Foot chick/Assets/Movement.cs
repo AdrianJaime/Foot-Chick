@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
     {
 
         //Control de movimiento del dedo sobre la pantalla
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted)
         {
             Touch touch = Input.GetTouch(0);
             screenPos = cam.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, dist));
@@ -78,5 +78,10 @@ public class Movement : MonoBehaviour
             cam.transform.position = new Vector3(cam.transform.position.x, cameraLimits.y - 0.01f, cam.transform.position.z);
         if (cam.transform.position.y < -cameraLimits.y)
             cam.transform.position = new Vector3(cam.transform.position.x, -cameraLimits.y + 0.01f, cam.transform.position.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle")) GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
     }
 }

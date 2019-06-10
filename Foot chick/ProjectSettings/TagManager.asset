@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Aux Cam
   - Obstacle
+  - Character
   layers:
   - Default
   - TransparentFX

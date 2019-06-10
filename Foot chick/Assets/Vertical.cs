@@ -14,8 +14,10 @@ public class Vertical : MonoBehaviour
         cam = obsData.cam;
         width = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).x;
         height = cam.ScreenToWorldPoint(new Vector3(Screen.height, 0, Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z))).y;
-        gameObject.transform.position = new Vector3(0, Random.Range(0, 2) == 0 ? height - 5 : -height + 5, 15);
-        gameObject.transform.localScale = new Vector3(obsData.verticalSize.x, obsData.verticalSize.y, gameObject.transform.localScale.z);
+        float Sizey = cam.orthographicSize * 2;
+        float Sizex = Sizey * Screen.width / Screen.height;
+        gameObject.transform.position = new Vector3(0, Random.Range(0, 2) == 0 ? height : -height, 15);
+        gameObject.transform.localScale = new Vector3(Sizex , Sizey , gameObject.transform.localScale.z);
 
 
     }
