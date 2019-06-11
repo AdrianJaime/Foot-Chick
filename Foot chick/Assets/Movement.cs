@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     {
         cam = Camera.main;
         dist = Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z);
-        dragDistance = Screen.height * 20 / 100;
+        dragDistance = Screen.height * 10 / 100;
     }
 
     // Update is called once per frame
@@ -121,7 +121,11 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle")) GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
+        if (other.CompareTag("Obstacle"))
+        {
+            GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
+            Destroy(other.gameObject);
+        }
         if (other.CompareTag("Ball"))
         {
             shooting = true;
@@ -186,6 +190,7 @@ public class Movement : MonoBehaviour
             {
                 shooting = false;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
+
             }
         }
     }
