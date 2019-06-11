@@ -116,7 +116,7 @@ public class Movement : MonoBehaviour
         {
             swipeList.Add(Random.Range(0, 8));
         }
-        GameObject.Find("Swipe Container").GetComponent<Swipes>().setSwipes();
+        GameObject.Find("Swipe Container").GetComponent<Swipes>().setSwipes(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -132,6 +132,7 @@ public class Movement : MonoBehaviour
     
     private void CheckIfCorrect(Vector2 swipeDist)
     {
+        int length = swipeList.Count;
         switch (swipeList[0])
         {
             case 0:
@@ -176,6 +177,16 @@ public class Movement : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        if (length > swipeList.Count)
+        {
+            Debug.Log("Set");
+            GameObject.Find("Swipe Container").GetComponent<Swipes>().setSwipes(true);
+            if (swipeList.Count == 0)
+            {
+                shooting = false;
+                GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
+            }
         }
     }
 

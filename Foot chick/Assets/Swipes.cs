@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class Swipes : MonoBehaviour
 {
 
-    public Sprite[] swipes;
+    public Sprite[] swipeSprites;
     public GameObject swipe;
+    public GameObject[] swipeArr;
     private Movement charData;
     RectTransform swipeRect, containerRect;
     float width, ratio, height;
@@ -27,20 +28,18 @@ public class Swipes : MonoBehaviour
         
     }
 
-    public void setSwipes()
+    public void setSwipes(bool swiped)
     {
-        width = containerRect.rect.width / obsData.difficulty;
-        ratio = width / swipeRect.rect.width;
-        height = swipeRect.rect.height * ratio;
-        for(int i = 0; i < charData.swipeList.Count; i++)
+        swipeArr = GameObject.FindGameObjectsWithTag("Swipe");
+        for (int i = 0; i < charData.swipeList.Count; i++)
         {
-            GameObject newItem = Instantiate(swipe, gameObject.transform);
-            RectTransform itemRect = newItem.GetComponent<RectTransform>();
-            float x = -containerRect.rect.width / 2 + width * i;
-            float y = containerRect.rect.height / 2;
-            x = itemRect.offsetMin.x + width;
-            y = itemRect.offsetMin.y + height;
-            itemRect.offsetMax = new Vector2(x, y);
+            swipeArr[i].GetComponent<Image>().sprite = swipeSprites[charData.swipeList[i]];
+            if (!swiped) swipeArr[i].transform.localScale = new Vector3(1, 1, 1);
+        }
+        if (charData.swipeList.Count >= 0 && swiped)
+        {
+            swipeArr[charData.swipeList.Count].transform.localScale = new Vector3(0, 1, 1);
+            swiped = false;
         }
     }
 }

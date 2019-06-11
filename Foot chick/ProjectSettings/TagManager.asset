@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Character
   - Ball
+  - Swipe
   layers:
   - Default
   - TransparentFX
