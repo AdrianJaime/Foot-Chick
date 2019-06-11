@@ -112,8 +112,11 @@ public class Movement : MonoBehaviour
 
     private void FillSwipeList()
     {
-        while(swipeList.Count < /*GAME DIFFICULTY*/ 4)
-            swipeList.Add( Random.Range(0, 8));
+        while (swipeList.Count < GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().difficulty)
+        {
+            swipeList.Add(Random.Range(0, 8));
+        }
+        GameObject.Find("Swipe Container").GetComponent<Swipes>().setSwipes();
     }
 
     private void OnTriggerEnter(Collider other)

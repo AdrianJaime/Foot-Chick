@@ -11,12 +11,14 @@ public class ObstacleGenerator : MonoBehaviour
     public bool gameStarted;
     public GameObject lastObject;
 
+    public int difficulty; //number of swipes per ball
+
     public Vector2 lateralSize, verticalSize;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (difficulty < 4) difficulty = 4;
     }
 
     // Update is called once per frame
