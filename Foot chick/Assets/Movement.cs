@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
 
     private void FillSwipeList()
     {
-        if(swipeList.Count < /*GAME DIFFICULTY*/ 4)
+        while(swipeList.Count < /*GAME DIFFICULTY*/ 4)
             swipeList.Add( Random.Range(0, 8));
     }
 
@@ -129,77 +129,51 @@ public class Movement : MonoBehaviour
     
     private void CheckIfCorrect(Vector2 swipeDist)
     {
-        if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("UP");
-        if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y > 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("UP-RIGHT");
-        if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("RIGHT");
-        if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y < -0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("DOWN-RIGHT");
-        if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("DOWN");
-        if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y < -0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("LEFT-DOWN");
-        if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("LEFT");
-        if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y > 0.5f)
-            //swipeList.RemoveAt(0);
-            Debug.Log("UP-LEFT");
-
-        //////////////////////////////////////////
-        //switch (swipeList[1])
-        //{
-        //    case 0:
-        //        if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("UP");
-        //        break;
-        //    case 1:
-        //        if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x < 0.65f && swipeDist.y < 0.65f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("UP-RIGHT");
-        //        break;
-        //    case 2:
-        //        if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("RIGHT");
-        //        break;
-        //    case 3:
-        //        if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x < 0.65f && swipeDist.y < -0.65f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("DOWN-RIGHT");
-        //        break;
-        //    case 4:
-        //        if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("DOWN");
-        //        break;
-        //    case 5:
-        //        if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.65f && swipeDist.y < -0.65f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("LEFT-DOWN");
-        //        break;
-        //    case 6:
-        //        if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("LEFT");
-        //        break;
-        //    case 7:
-        //        if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.65f && swipeDist.y < 0.65f)
-        //            //swipeList.RemoveAt(0);
-        //            Debug.Log("UP-LEFT");
-        //        break;
-        //    default:
-        //        break;
-        //}
+        switch (swipeList[0])
+        {
+            case 0:
+                if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+                    swipeList.RemoveAt(0);
+                    // UP SWIPE
+                break;
+            case 1:
+                if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y > 0.5f)
+                    swipeList.RemoveAt(0);
+                    // UP-RIGHT SWIPE
+                break;
+            case 2:
+                if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+                    swipeList.RemoveAt(0);
+                    // RIGHT SWIPE
+                break;
+            case 3:
+                if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y < -0.5f)
+                    swipeList.RemoveAt(0);
+                    // DOWN-RIGHT SWIPE
+                break;
+            case 4:
+                if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+                    swipeList.RemoveAt(0);
+                    // DOWN SWIPE
+                break;
+            case 5:
+                if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y < -0.5f)
+                    swipeList.RemoveAt(0);
+                    // DOWN-LEFT SWIPE
+                break;
+            case 6:
+                if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+                    swipeList.RemoveAt(0);
+                    // LEFT SWIPE
+                break;
+            case 7:
+                if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y > 0.5f)
+                    swipeList.RemoveAt(0);
+                    // UP-LEFT SWIPE
+                break;
+            default:
+                break;
+        }
     }
 
 }
