@@ -5,24 +5,54 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Camera cam;
+    private Vector3 firstCharacterPos, screenPos, move, firstFingerPos, endFingerPos, camFirstPos, limits, cameraLimits;
+    private float dist, dragDistance;
+    public bool shooting = false, released = false;
+    Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
+    public List<int> swipeList;
 
-    private Vector3 firstCharacterPos, screenPos, move, firstFingerPos, endFingerPos, camFirstPos;
-    private Vector3 limits, cameraLimits;
-    private float dist;
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         dist = Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z);
-
+        dragDistance = Screen.height * 20 / 100;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Chutando balón
+        if (shooting)
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch swipe = Input.GetTouch(0);
+                if (swipe.phase == TouchPhase.Began && !released) released = true;
 
+                if (released)
+                {
+                    if (swipe.phase == TouchPhase.Began)
+                    {
+                        end = start = swipe.position;
+                    }
+                    if (swipe.phase == TouchPhase.Ended)
+                    {
+                        end = swipe.position;
+                    }
+                    swipeDist = end - start;
+                    if (Mathf.Abs(swipeDist.x) > dragDistance || Mathf.Abs(swipeDist.y) > dragDistance)
+                    {
+                        swipeDist.Normalize();
+                        CheckIfCorrect(swipeDist);
+                    }
+                }
+            }
+
+            //Al final resetear speed en ObstacleGenerator
+        }
         //Control de movimiento del dedo sobre la pantalla
-        if (Input.touchCount > 0 && GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted)
+        else if (Input.touchCount > 0 && GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted )
         {
             Touch touch = Input.GetTouch(0);
             screenPos = cam.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, dist));
@@ -80,8 +110,96 @@ public class Movement : MonoBehaviour
             cam.transform.position = new Vector3(cam.transform.position.x, -cameraLimits.y + 0.01f, cam.transform.position.z);
     }
 
+    private void FillSwipeList()
+    {
+        if(swipeList.Count < /*GAME DIFFICULTY*/ 4)
+            swipeList.Add( Random.Range(0, 8));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle")) GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
+        if (other.CompareTag("Ball"))
+        {
+            shooting = true;
+            FillSwipeList();
+            // AÑADIR GRÁFICOS SWIPE
+        }
     }
+    
+    private void CheckIfCorrect(Vector2 swipeDist)
+    {
+        if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("UP");
+        if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y > 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("UP-RIGHT");
+        if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("RIGHT");
+        if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y < -0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("DOWN-RIGHT");
+        if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("DOWN");
+        if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y < -0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("LEFT-DOWN");
+        if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("LEFT");
+        if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y > 0.5f)
+            //swipeList.RemoveAt(0);
+            Debug.Log("UP-LEFT");
+
+        //////////////////////////////////////////
+        //switch (swipeList[1])
+        //{
+        //    case 0:
+        //        if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("UP");
+        //        break;
+        //    case 1:
+        //        if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x < 0.65f && swipeDist.y < 0.65f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("UP-RIGHT");
+        //        break;
+        //    case 2:
+        //        if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("RIGHT");
+        //        break;
+        //    case 3:
+        //        if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x < 0.65f && swipeDist.y < -0.65f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("DOWN-RIGHT");
+        //        break;
+        //    case 4:
+        //        if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("DOWN");
+        //        break;
+        //    case 5:
+        //        if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.65f && swipeDist.y < -0.65f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("LEFT-DOWN");
+        //        break;
+        //    case 6:
+        //        if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("LEFT");
+        //        break;
+        //    case 7:
+        //        if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.65f && swipeDist.y < 0.65f)
+        //            //swipeList.RemoveAt(0);
+        //            Debug.Log("UP-LEFT");
+        //        break;
+        //    default:
+        //        break;
+        //}
+    }
+
 }

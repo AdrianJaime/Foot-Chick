@@ -5,8 +5,8 @@ using UnityEngine;
 public class ObstacleGenerator : MonoBehaviour
 {
     public GameObject[] Obstacles, Items;
-    public float speed;
-    public float speedAum;
+    public float speed, speedAum;
+    private float savedSpeed;
     public Camera cam;
     public bool gameStarted;
     public GameObject lastObject;
@@ -24,7 +24,11 @@ public class ObstacleGenerator : MonoBehaviour
     {
         if (gameStarted)
         {
-            speed += Time.deltaTime * speedAum;
+            if (!GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().shooting) speed += Time.deltaTime * speedAum;
+            else {
+                savedSpeed = speed;
+                speed = 0;
+                    }
             if (lastObject.transform.position.z < 5)
             {
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
@@ -63,6 +67,6 @@ public class ObstacleGenerator : MonoBehaviour
         //75-99 Ball
         int result = Random.Range(0, 100);
         if (result > 74) return 1;
-        return 0; ///////////////////////////////////
+        return 1; ///////////////////////////////////
     }
 }
