@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Swipes : MonoBehaviour
 {
@@ -16,8 +18,6 @@ public class Swipes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        containerRect = GetComponent<RectTransform>();
-        swipeRect = swipe.GetComponent<RectTransform>();
         obsData = GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>();
         charData = GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>();
     }
@@ -30,7 +30,7 @@ public class Swipes : MonoBehaviour
 
     public void setSwipes(bool swiped)
     {
-        swipeArr = GameObject.FindGameObjectsWithTag("Swipe");
+        swipeArr = GameObject.FindGameObjectsWithTag("Swipe").OrderBy(GameObject => GameObject.name).ToArray();
         for (int i = 0; i < charData.swipeList.Count; i++)
         {
             swipeArr[i].GetComponent<Image>().sprite = swipeSprites[charData.swipeList[i]];

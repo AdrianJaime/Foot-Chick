@@ -17,7 +17,7 @@ public class LateralObstacle : MonoBehaviour
         float Sizey = cam.orthographicSize * 2;
         float Sizex = Sizey * Screen.width / Screen.height;
 
-        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width : -width , height * 4, 15);
+        gameObject.transform.position = new Vector3(Random.Range(0, 2) == 0 ? width + 1: -width , height * 3, 15);
         gameObject.transform.localScale = new Vector3(Sizex/2 , Sizey/2, gameObject.transform.localScale.z);
 
 
@@ -27,8 +27,13 @@ public class LateralObstacle : MonoBehaviour
     void Update()
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed);
-        if(gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
-        if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject) Destroy(gameObject);
+        if (gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
+        if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject)
+        {
+            GameObject.Find("Points").GetComponent<PointFixer>().points++;
+            GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
+            Destroy(gameObject);
+        }
     }
 
 }

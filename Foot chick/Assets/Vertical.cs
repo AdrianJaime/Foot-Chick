@@ -29,10 +29,11 @@ public class Vertical : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed);
         if (gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
-    }
-
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
+        if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject)
+        {
+            GameObject.Find("Points").GetComponent<PointFixer>().points++;
+            GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
+            Destroy(gameObject);
+        }
     }
 }

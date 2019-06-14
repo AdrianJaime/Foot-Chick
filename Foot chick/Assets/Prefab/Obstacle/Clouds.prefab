@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5914021754401913630}
   - component: {fileID: 1118184578728280165}
   - component: {fileID: 6026411626382827397}
-  - component: {fileID: 3767883231788849955}
   m_Layer: 0
   m_Name: pCube5_clouds
   m_TagString: Obstacle
@@ -78,20 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3767883231788849955
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204485511787245046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -1028047244508941572, guid: b63febaf99ba81b4084e185dfc188e34, type: 3}
 --- !u!1 &447197018840555259
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +88,6 @@ GameObject:
   - component: {fileID: 3375574676843012633}
   - component: {fileID: 1632460706697673883}
   - component: {fileID: 3758730119188651630}
-  - component: {fileID: 5725675161112886123}
   m_Layer: 0
   m_Name: clouds_pCube3
   m_TagString: Obstacle
@@ -170,20 +154,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5725675161112886123
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447197018840555259}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 554471234951405172, guid: b63febaf99ba81b4084e185dfc188e34, type: 3}
 --- !u!1 &2689824120028712667
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +165,6 @@ GameObject:
   - component: {fileID: 6746023588972299776}
   - component: {fileID: 4115463897468404870}
   - component: {fileID: 7497516527205031028}
-  - component: {fileID: 2236277075452101730}
   m_Layer: 0
   m_Name: clouds_pCube4
   m_TagString: Obstacle
@@ -262,20 +231,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2236277075452101730
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2689824120028712667}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3946716215093344482, guid: b63febaf99ba81b4084e185dfc188e34, type: 3}
 --- !u!1 &2728645311872457581
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +242,7 @@ GameObject:
   - component: {fileID: 3614087786550369244}
   - component: {fileID: 6206839330783852902}
   - component: {fileID: -5579875057241097645}
-  - component: {fileID: -3896274784396256115}
+  - component: {fileID: 8863574452371242315}
   m_Layer: 0
   m_Name: Clouds
   m_TagString: Obstacle
@@ -340,8 +295,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b3b926071a4e34094771108d428d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &-3896274784396256115
-MeshCollider:
+  width: 0
+  height: 0
+--- !u!65 &8863574452371242315
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -350,7 +307,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 520.608, y: 155.88174, z: 274.71182}
+  m_Center: {x: -0.6202698, y: 24.48833, z: 28.377783}

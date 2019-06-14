@@ -55,7 +55,7 @@ public class ObstacleGenerator : MonoBehaviour
         // 0 = lateral
         // 1 = vertical
         // 2 = cruzados
-        // 3 = agujero
+        // 3 = agujero (To do)
         // 4 = aire  (To do)
         // 5 = móviles (To do)
         
@@ -65,10 +65,10 @@ public class ObstacleGenerator : MonoBehaviour
 
     int SummonItem()
     {
-        //0-74 Nothing
-        //75-99 Ball
+        //0 Nothing
+        //1 Ball
         int result = Random.Range(0, 100);
-        if (result > 75) return 1;
+        if (result > 85) return 1;
         return 0; 
     }
     public void RestoreSpeed()

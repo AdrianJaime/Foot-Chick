@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     public bool shooting = false, released = false;
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
+    private GameObject shootingBall;
 
     // Start is called before the first frame update
     void Start()
@@ -130,6 +131,8 @@ public class Movement : MonoBehaviour
         {
             shooting = true;
             FillSwipeList();
+            released = false;
+            shootingBall = other.gameObject;
             // AÑADIR GRÁFICOS SWIPE
         }
     }
@@ -190,7 +193,8 @@ public class Movement : MonoBehaviour
             {
                 shooting = false;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
-
+                GameObject.Find("Balls").GetComponent<BallFixer>().SumPoints();
+                Destroy(shootingBall);
             }
         }
     }
