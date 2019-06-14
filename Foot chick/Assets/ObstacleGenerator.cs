@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleGenerator : MonoBehaviour
 {
     public GameObject[] Obstacles, Items;
-    public float speed, speedAum;
+    public float speed, speedAum, start_time;
     private float savedSpeed;
     public Camera cam;
     public bool gameStarted;
@@ -40,8 +40,9 @@ public class ObstacleGenerator : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began && !GameObject.Find("Restart") && !gameStarted)
+            if (touch.phase == TouchPhase.Began /*&& !GameObject.Find("Restart")*/ && !gameStarted)
             {
+                start_time = Time.time;
                 gameStarted = true;
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
                 if (SummonItem() == 1) Instantiate(Items[0], gameObject.transform);

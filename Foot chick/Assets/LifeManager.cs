@@ -7,6 +7,8 @@ public class LifeManager : MonoBehaviour
 {
     public int lifes;
     public Sprite lostLife, fullLife;
+    public GameObject[] screen;
+    public GameObject newRecord, pointsResult;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,39 +18,43 @@ public class LifeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lifes == 0)
-        {
-            SaveData();
-            Button[] ButtonList = Resources.FindObjectsOfTypeAll<Button>();
-            foreach (Button button in ButtonList)
-            {
-                if (button.name == "Restart") button.gameObject.SetActive(true);
-
-            }
-            GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted = false;
-            GameObject.FindGameObjectWithTag("Character").GetComponent<Transform>().position = Vector3.zero;
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>().position = new Vector3(0, 0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>().position.z);
-            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Obstacle").Length; i++) Destroy(GameObject.FindGameObjectsWithTag("Obstacle")[i]);
-            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Ball").Length; i++) Destroy(GameObject.FindGameObjectsWithTag("Ball")[i]);
-        }
     }
     public void LoseLife()
     {
         GameObject.Find("Heart " + lifes).GetComponent<Image>().sprite = lostLife;
         lifes--;
-             
+        if (lifes == 0) Die();
     }
-    public void Restart()
+
+   /* public void Restart()
     {
         lifes = 3;
         for (int i = 1; i < 4; i++) GameObject.Find("Heart " + i).GetComponent<Image>().sprite = fullLife;
         GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
         GameObject.Find("Restart").SetActive(false);
-    }
+    }*/
 
     private void SaveData()
     {
         PlayerPrefs.SetInt("Balls", GameObject.Find("Balls").GetComponent<BallFixer>().points);
-        if(PlayerPrefs.GetInt("Record", 0) < GameObject.Find("Points").GetComponent<PointFixer>().points) PlayerPrefs.SetInt("Record", GameObject.Find("Points").GetComponent<PointFixer>().points);
+        if (PlayerPrefs.GetInt("Record", 0) < GameObject.Find("Points").GetComponent<PointFixer>().points)
+        {
+            PlayerPrefs.SetInt("Record", GameObject.Find("Points").GetComponent<PointFixer>().points);
+            newRecord.SetActive(true);
+        }
+    }
+
+    private void Die()
+    {
+        SaveData();
+        Button[] ButtonList = Resources.FindObjectsOfTypeAll<Button>();
+        GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted = false;
+        GameObject.FindGameObjectWithTag("Character").GetComponent<Transform>().position = Vector3.zero;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>().position = new Vector3(0, 0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>().position.z);
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Obstacle").Length; i++) Destroy(GameObject.FindGameObjectsWithTag("Obstacle")[i]);
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Ball").Length; i++) Destroy(GameObject.FindGameObjectsWithTag("Ball")[i]);
+        screen[0].SetActive(false);
+        screen[1].SetActive(true);
+        GameObject.Find("ResultPoints").GetComponent<PointsResult>().ResultPoints();
     }
 }

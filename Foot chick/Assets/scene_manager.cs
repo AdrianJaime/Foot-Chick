@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class scene_manager : MonoBehaviour
 {
     public GameObject[] menus; // 0 = menú, 1 = settings
+
     public void ChangeScene(string scene)
     {
         SceneManager.LoadScene(scene);
@@ -25,5 +26,9 @@ public class scene_manager : MonoBehaviour
             menus[1].SetActive(true);
             opened = true;
         }
+    }
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }
