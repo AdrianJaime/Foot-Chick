@@ -44,6 +44,7 @@ public class ObstacleGenerator : MonoBehaviour
             {
                 start_time = Time.time;
                 gameStarted = true;
+                Camera.main.GetComponent<AudioSource>().Play();
                 lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
                 if (SummonItem() == 1) Instantiate(Items[0], gameObject.transform);
 

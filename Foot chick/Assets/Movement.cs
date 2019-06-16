@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Movement : MonoBehaviour
     public bool shooting = false, released = false;
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
+    public Sprite[] swipeAnimations;
     private GameObject shootingBall;
 
     // Start is called before the first frame update
@@ -126,6 +128,7 @@ public class Movement : MonoBehaviour
         {
             GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
             Destroy(other.gameObject);
+            GetComponent<AudioSource>().Play();
         }
         if (other.CompareTag("Ball"))
         {
@@ -144,43 +147,43 @@ public class Movement : MonoBehaviour
         {
             case 0:
                 if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-                    swipeList.RemoveAt(0);
-                    // UP SWIPE
+                    DoSwipe(swipeList[0]);
+                // UP SWIPE
                 break;
             case 1:
                 if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y > 0.5f)
-                    swipeList.RemoveAt(0);
-                    // UP-RIGHT SWIPE
+                    DoSwipe(swipeList[0]);
+                // UP-RIGHT SWIPE
                 break;
             case 2:
                 if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-                    swipeList.RemoveAt(0);
-                    // RIGHT SWIPE
+                    DoSwipe(swipeList[0]);
+                // RIGHT SWIPE
                 break;
             case 3:
                 if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y < -0.5f)
-                    swipeList.RemoveAt(0);
-                    // DOWN-RIGHT SWIPE
+                    DoSwipe(swipeList[0]);
+                // DOWN-RIGHT SWIPE
                 break;
             case 4:
                 if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
-                    swipeList.RemoveAt(0);
-                    // DOWN SWIPE
+                    DoSwipe(swipeList[0]);
+                // DOWN SWIPE
                 break;
             case 5:
                 if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y < -0.5f)
-                    swipeList.RemoveAt(0);
-                    // DOWN-LEFT SWIPE
+                    DoSwipe(swipeList[0]);
+                // DOWN-LEFT SWIPE
                 break;
             case 6:
                 if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
-                    swipeList.RemoveAt(0);
-                    // LEFT SWIPE
+                    DoSwipe(swipeList[0]);
+                // LEFT SWIPE
                 break;
             case 7:
                 if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y > 0.5f)
-                    swipeList.RemoveAt(0);
-                    // UP-LEFT SWIPE
+                    DoSwipe(swipeList[0]);
+                // UP-LEFT SWIPE
                 break;
             default:
                 break;
@@ -197,6 +200,15 @@ public class Movement : MonoBehaviour
                 Destroy(shootingBall);
             }
         }
+    }
+
+    private void DoSwipe(int swipe)
+    {
+        swipeList.RemoveAt(0);
+        GameObject.Find("SwipeAnimation").GetComponent<SwipeAnimations>().passedTime = 0;
+        GameObject.Find("SwipeAnimation").GetComponent<SwipeAnimations>().showing = true;
+        GameObject.Find("SwipeAnimation").transform.localScale = new Vector3(1, 1, 1);
+        GameObject.Find("SwipeAnimation").GetComponent<Image>().sprite = swipeAnimations[swipe];
     }
 
 }
