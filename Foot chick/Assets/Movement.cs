@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
             //Al final resetear speed en ObstacleGenerator
         }
         //Control de movimiento del dedo sobre la pantalla
-        else if (Input.touchCount > 0 && GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameStarted )
+        else if (Input.touchCount > 0 )
         {
             Touch touch = Input.GetTouch(0);
             screenPos = cam.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, dist));
