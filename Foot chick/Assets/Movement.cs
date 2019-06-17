@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     public List<int> swipeList;
     public Sprite[] swipeAnimations;
     private GameObject shootingBall;
+    private int swipeLifes;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +137,7 @@ public class Movement : MonoBehaviour
             FillSwipeList();
             released = false;
             shootingBall = other.gameObject;
+            swipeLifes = 2;
             // AÑADIR GRÁFICOS SWIPE
         }
     }
@@ -148,21 +150,25 @@ public class Movement : MonoBehaviour
             case 0:
                 if (swipeDist.y > 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // UP SWIPE
                 break;
             case 1:
                 if (swipeDist.y > 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y > 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // UP-RIGHT SWIPE
                 break;
             case 2:
                 if (swipeDist.x > 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // RIGHT SWIPE
                 break;
             case 3:
                 if (swipeDist.y < 0 && swipeDist.x > 0 && swipeDist.x > 0.5f && swipeDist.y < -0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // DOWN-RIGHT SWIPE
                 break;
             case 4:
@@ -173,16 +179,19 @@ public class Movement : MonoBehaviour
             case 5:
                 if (swipeDist.y < 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y < -0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // DOWN-LEFT SWIPE
                 break;
             case 6:
                 if (swipeDist.x < 0 && swipeDist.y > -0.5f && swipeDist.y < 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // LEFT SWIPE
                 break;
             case 7:
                 if (swipeDist.y > 0 && swipeDist.x < 0 && swipeDist.x < -0.5f && swipeDist.y > 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // UP-LEFT SWIPE
                 break;
             default:
@@ -196,7 +205,9 @@ public class Movement : MonoBehaviour
             {
                 shooting = false;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
-                GameObject.Find("Balls").GetComponent<BallFixer>().SumPoints();
+                if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().points += 5;
+                else GameObject.Find("Points").GetComponent<PointFixer>().points += 2;
+                GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
                 Destroy(shootingBall);
             }
         }

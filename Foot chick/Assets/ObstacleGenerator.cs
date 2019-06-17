@@ -8,7 +8,7 @@ public class ObstacleGenerator : MonoBehaviour
     public float speed, speedAum, start_time;
     private float savedSpeed;
     public Camera cam;
-    public bool gameStarted;
+    public bool gameStarted, gameEnded;
     public GameObject lastObject;
 
     public int difficulty; //number of swipes per ball
@@ -19,6 +19,7 @@ public class ObstacleGenerator : MonoBehaviour
     void Start()
     {
         if (difficulty < 4) difficulty = 4;
+        gameEnded = false;
     }
 
     // Update is called once per frame
@@ -43,10 +44,14 @@ public class ObstacleGenerator : MonoBehaviour
             if (touch.phase == TouchPhase.Began /*&& !GameObject.Find("Restart")*/ && !gameStarted)
             {
                 start_time = Time.time;
-                gameStarted = true;
+                if (!gameEnded)
+                {
+                    gameStarted = true;
+                    lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
+                }
                 Camera.main.GetComponent<AudioSource>().Play();
-                lastObject = Instantiate(Obstacles[randomObstacle()], gameObject.transform);
-                if (SummonItem() == 1) Instantiate(Items[0], gameObject.transform);
+
+                if (SummonItem() == 1 && !gameEnded) Instantiate(Items[0], gameObject.transform);
 
             }
         }
