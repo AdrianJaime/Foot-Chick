@@ -20,7 +20,6 @@ public class SwipeAnimations : MonoBehaviour
         if (showing)
         {
             passedTime += Time.deltaTime;
-            Debug.Log(passedTime);
             if (passedTime >= animationTime)
             {
                 showing = false;

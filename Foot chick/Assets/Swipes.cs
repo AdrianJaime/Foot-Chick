@@ -12,8 +12,6 @@ public class Swipes : MonoBehaviour
     public GameObject swipe;
     public GameObject[] swipeArr;
     private Movement charData;
-    RectTransform swipeRect, containerRect;
-    float width, ratio, height;
     ObstacleGenerator obsData;
     // Start is called before the first frame update
     void Start()
@@ -35,9 +33,18 @@ public class Swipes : MonoBehaviour
         {
             swipeArr[i].GetComponent<Image>().sprite = swipeSprites[charData.swipeList[i]];
             if (!swiped) swipeArr[i].transform.localScale = new Vector3(1, 1, 1);
+            //Change alpha
+            if (i > 0 && PlayerPrefs.GetInt("Tutorial", 0) == 0)
+            {
+                swipeArr[i].GetComponent<Image>().color = new Color(swipeArr[i].GetComponent<Image>().color.r, swipeArr[i].GetComponent<Image>().color.g, swipeArr[i].GetComponent<Image>().color.b, 0.5f);
+            }
         }
         if (charData.swipeList.Count >= 0 && swiped)
         {
+            if (PlayerPrefs.GetInt("Tutorial", 0) == 0)
+            {
+                swipeArr[charData.swipeList.Count].GetComponent<Image>().color = new Color(swipeArr[charData.swipeList.Count].GetComponent<Image>().color.r, swipeArr[charData.swipeList.Count].GetComponent<Image>().color.g, swipeArr[charData.swipeList.Count].GetComponent<Image>().color.b, 1);
+            }
             swipeArr[charData.swipeList.Count].transform.localScale = new Vector3(0, 1, 1);
             swiped = false;
         }

@@ -71,7 +71,7 @@ public class ObstacleGenerator : MonoBehaviour
         //1 Ball
         int result = Random.Range(0, 100);
         if (result > 85) return 1;
-        return 0; 
+        return 0;
     }
     public void RestoreSpeed()
     {
