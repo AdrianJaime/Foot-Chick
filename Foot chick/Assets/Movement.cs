@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
     public Sprite[] swipeAnimations;
-    private GameObject shootingBall;
+    public GameObject shootingBall;
     private int swipeLifes;
 
     // Start is called before the first frame update
@@ -137,7 +137,7 @@ public class Movement : MonoBehaviour
             FillSwipeList();
             released = false;
             shootingBall = other.gameObject;
-            swipeLifes = 2;
+            swipeLifes = 3;
             // AÑADIR GRÁFICOS SWIPE
         }
     }
@@ -205,10 +205,13 @@ public class Movement : MonoBehaviour
             {
                 shooting = false;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
-                if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().points += 5;
-                else GameObject.Find("Points").GetComponent<PointFixer>().points += 2;
+                if (swipeLifes == 3) GameObject.Find("Points").GetComponent<PointFixer>().points += 5;
+                else if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().points += 2;
+                else GameObject.Find("Points").GetComponent<PointFixer>().points++;
                 GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
                 Destroy(shootingBall);
+                for (int i = 0; i < GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr.Length; i++)
+                    GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color = new Color(GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.r, GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.g, GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.b, 1);
             }
         }
     }

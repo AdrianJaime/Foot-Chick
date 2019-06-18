@@ -10,8 +10,8 @@ public class ButtonLevel : MonoBehaviour
 
     public void Start()
     {
-        soundLevel = PlayerPrefs.GetInt("SoundLevel", 0);
-        musicLevel = PlayerPrefs.GetInt("MusicLevel", 0);
+        soundLevel = PlayerPrefs.GetInt("SoundLevel", 1);
+        musicLevel = PlayerPrefs.GetInt("MusicLevel", 1);
         GameObject.Find("MusicVol").GetComponent<Image>().sprite = musicSprites[musicLevel];
         GameObject.Find("SoundVol").GetComponent<Image>().sprite = soundSprites[soundLevel];
     }
