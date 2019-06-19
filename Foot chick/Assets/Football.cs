@@ -55,14 +55,14 @@ public class Football : MonoBehaviour
             if (obsData.lastObject.name == "Horizontal(Clone)" && obsData.lastObject.transform.position.x == obsData.lastObject.GetComponent<LateralObstacle>().width + 1)
             {
                 if (randNumb == 1)
-                    return new Vector2(-Sizex / 4, Sizey / 6f);
+                    return new Vector2(-Sizex / 4 - 1, Sizey / 6f);
                 if (randNumb == 3)
                     return new Vector2(-Sizex / 4 - 1, -Sizey / 3.5f);
             }
             if (obsData.lastObject.name == "Horizontal(Clone)" && obsData.lastObject.transform.position.x == -obsData.lastObject.GetComponent<LateralObstacle>().width)
             {
                 if (randNumb == 2)
-                    return new Vector2(Sizex / 4, Sizey / 6f);
+                    return new Vector2(Sizex / 4 + 1, Sizey / 6f);
                 if (randNumb == 4)
                     return new Vector2(Sizex / 4 + 1, -Sizey / 3.5f);
             }
