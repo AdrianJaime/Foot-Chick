@@ -1264,6 +1264,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 76.46
       objectReference: {fileID: 0}
+    - target: {fileID: 6041336762723466304, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: Priority
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1585389607dd49f43b5c6b1c333d8bae, type: 3}
 --- !u!1 &705507993
@@ -1736,6 +1741,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1820,7 +1826,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c74db9afde2853441869fc827be5419f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.502
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1904,6 +1910,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee67619f1f3d494f9837a73aa991a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeFraction: 0
+  wichLevel: 
+--- !u!1 &977680699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6041336762723466307, guid: 1585389607dd49f43b5c6b1c333d8bae,
+    type: 3}
+  m_PrefabInstance: {fileID: 678700537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &977680700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977680699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee67619f1f3d494f9837a73aa991a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeFraction: 1
+  wichLevel: SoundLevel
 --- !u!1 &1034188931
 GameObject:
   m_ObjectHideFlags: 0
