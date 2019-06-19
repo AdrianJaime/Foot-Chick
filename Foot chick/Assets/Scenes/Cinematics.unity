@@ -178,11 +178,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Tired from his long journey, Crow finally gave up. Even with all his effort,
-    it  looked like he accomplished nothing. A whole day shooting balls, and no-one
-    felt his passion. Or at least that was what he thought... Football passion grew
-    in some birds' heart. And not only that, other species felt the same passion,
-    even some learnt to fly...
+  m_text: 'Tired from his long journey, Crow finally gave up. Even with all his effort,
+    it  looked like he accomplished nothing.
+
+    A whole day shooting balls, and no-one felt his passion. Or at least that was
+    what he thought... Football passion grew in some birds'' heart. And not only that,
+    other species felt the same passion, even some learnt to fly...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6ea7fbab7b572642b7b87ec568839db, type: 2}
   m_sharedMaterial: {fileID: -8673016943368324547, guid: a6ea7fbab7b572642b7b87ec568839db,
@@ -257,7 +258,7 @@ MonoBehaviour:
     spaceCount: 60
     wordCount: 60
     linkCount: 0
-    lineCount: 13
+    lineCount: 14
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -492,7 +493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2177}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825529886
@@ -510,6 +511,7 @@ MonoBehaviour:
   text:
   - {fileID: 1977987423}
   - {fileID: 72802869}
+  textSpeed: 120
 --- !u!1 &997392746
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,12 +996,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: A (not) too long time ago. There was a rule which prohibit birds to play
+  m_text: 'A (not) too long time ago. There was a rule which prohibit birds to play
     football and do human things, this was a big issue to Crow who is a football fanatic.
+
     Everything changed the day when a silly airplane copilot opened the gates of a
     cargo plane filled with football balls. Those started falling and Corw saw his
     opportunity. He was about to do the most incredible shots and amaze the other
-    birds.
+    birds.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6ea7fbab7b572642b7b87ec568839db, type: 2}
   m_sharedMaterial: {fileID: -8673016943368324547, guid: a6ea7fbab7b572642b7b87ec568839db,
@@ -1074,7 +1077,7 @@ MonoBehaviour:
     spaceCount: 73
     wordCount: 74
     linkCount: 0
-    lineCount: 16
+    lineCount: 17
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

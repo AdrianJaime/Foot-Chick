@@ -9,7 +9,9 @@ public class scene_manager : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        Debug.Log(PlayerPrefs.GetInt("Tutorial", 0));
+        if(scene == "Gameplay" && PlayerPrefs.GetInt("Tutorial", 0) == 0) SceneManager.LoadScene("Cinematics");
+        else SceneManager.LoadScene(scene);
     }
 
     public void OpenCloseSettings(bool opened)
