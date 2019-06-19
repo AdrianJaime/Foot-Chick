@@ -1269,6 +1269,34 @@ PrefabInstance:
       propertyPath: Priority
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 2375313248660268372, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: swipeLifesSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375313248660268372, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: swipeLifesImage
+      value: 
+      objectReference: {fileID: 762126213}
+    - target: {fileID: 2375313248660268372, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: swipeLifesSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 219a55660283f4e4497511193f5f41de,
+        type: 3}
+    - target: {fileID: 2375313248660268372, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: swipeLifesSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: d6aacf81514138b49937be3e415156f7,
+        type: 3}
+    - target: {fileID: 2375313248660268372, guid: 1585389607dd49f43b5c6b1c333d8bae,
+        type: 3}
+      propertyPath: swipeLifesSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e096d26d675d5dc4d8a200d04ad2ea8f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1585389607dd49f43b5c6b1c333d8bae, type: 3}
 --- !u!1 &705507993
@@ -1435,6 +1463,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730574420}
+  m_CullTransparentMesh: 0
+--- !u!1 &762126213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 762126214}
+  - component: {fileID: 762126216}
+  - component: {fileID: 762126215}
+  m_Layer: 5
+  m_Name: SwipeLifes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &762126214
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762126213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1034188932}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 252, y: -622}
+  m_SizeDelta: {x: 306, y: 339}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &762126215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762126213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 219a55660283f4e4497511193f5f41de, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &762126216
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762126213}
   m_CullTransparentMesh: 0
 --- !u!1 &825128439
 GameObject:
@@ -1922,8 +2024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee67619f1f3d494f9837a73aa991a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeFraction: 0
-  wichLevel: 
+  volumeFraction: 0.5
+  wichLevel: MusicLevel
 --- !u!1 &977680699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6041336762723466307, guid: 1585389607dd49f43b5c6b1c333d8bae,
@@ -1976,6 +2078,7 @@ RectTransform:
   - {fileID: 312462999}
   - {fileID: 1900433190}
   - {fileID: 673527123}
+  - {fileID: 762126214}
   m_Father: {fileID: 1038050310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2478,7 +2581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb9ceca44c0ede45a812b93283c8b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 1
+  animationTime: 0.5
   passedTime: 0
   showing: 0
 --- !u!114 &1392916026

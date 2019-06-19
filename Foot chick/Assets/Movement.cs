@@ -11,9 +11,9 @@ public class Movement : MonoBehaviour
     public bool shooting = false, released = false;
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
-    public Sprite[] swipeAnimations;
-    public GameObject shootingBall;
-    private int swipeLifes;
+    public Sprite[] swipeAnimations, swipeLifesSprites;
+    public GameObject shootingBall, swipeLifesImage;
+    public int swipeLifes, changedSL;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,7 @@ public class Movement : MonoBehaviour
         //Chutando balón
         if (shooting)
         {
+            if (swipeLifes != changedSL) swipeLifesChange();
             if (Input.touchCount > 0)
             {
                 Touch swipe = Input.GetTouch(0);
@@ -137,6 +138,7 @@ public class Movement : MonoBehaviour
             FillSwipeList();
             released = false;
             shootingBall = other.gameObject;
+            changedSL = 0;
             swipeLifes = 3;
             // AÑADIR GRÁFICOS SWIPE
         }
@@ -174,6 +176,7 @@ public class Movement : MonoBehaviour
             case 4:
                 if (swipeDist.y < 0 && swipeDist.x > -0.5f && swipeDist.x < 0.5f)
                     DoSwipe(swipeList[0]);
+                else swipeLifes--;
                 // DOWN SWIPE
                 break;
             case 5:
@@ -197,6 +200,10 @@ public class Movement : MonoBehaviour
             default:
                 break;
         }
+        if(swipeLifes == 0)
+        {
+            swipeList.Clear();
+        }
         if (length > swipeList.Count)
         {
             Debug.Log("Set");
@@ -207,11 +214,13 @@ public class Movement : MonoBehaviour
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
                 if (swipeLifes == 3) GameObject.Find("Points").GetComponent<PointFixer>().points += 5;
                 else if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().points += 2;
-                else GameObject.Find("Points").GetComponent<PointFixer>().points++;
+                else if(swipeLifes == 1)GameObject.Find("Points").GetComponent<PointFixer>().points++;
                 GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
                 Destroy(shootingBall);
+                swipeLifesImage.transform.localScale = new Vector3(0, 1, 1);
                 for (int i = 0; i < GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr.Length; i++)
                     GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color = new Color(GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.r, GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.g, GameObject.Find("Swipe Container").GetComponent<Swipes>().swipeArr[i].GetComponent<Image>().color.b, 1);
+
             }
         }
     }
@@ -223,6 +232,16 @@ public class Movement : MonoBehaviour
         GameObject.Find("SwipeAnimation").GetComponent<SwipeAnimations>().showing = true;
         GameObject.Find("SwipeAnimation").transform.localScale = new Vector3(1, 1, 1);
         GameObject.Find("SwipeAnimation").GetComponent<Image>().sprite = swipeAnimations[swipe];
+    }
+
+    private void swipeLifesChange()
+    {
+        swipeLifesImage.GetComponent<Image>().sprite = swipeLifesSprites[swipeLifes - 1];
+        if (swipeLifesImage.transform.localScale.x == 0)
+        {
+            swipeLifesImage.transform.localScale = new Vector3(1, 1, 1);
+        }
+        changedSL = swipeLifes;
     }
 
 }

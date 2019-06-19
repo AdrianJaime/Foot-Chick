@@ -25,14 +25,15 @@ public class Swipes : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < swipeArr.Length && charData.shooting && PlayerPrefs.GetInt("Tutorial", 0) != 0; i++) swipeArr[i].GetComponent<Image>().color = new Color(swipeArr[i].GetComponent<Image>().color.r, swipeArr[i].GetComponent<Image>().color.g, swipeArr[i].GetComponent<Image>().color.b, swipeArr[i].GetComponent<Image>().color.a - Time.deltaTime * fadeSpeed);
-        if (swipeArr.Length > 0)
+        if (swipeArr.Length > 0 )
         {
-            if (swipeArr[0].GetComponent<Image>().color.a <= 0)
+            if (swipeArr[0].GetComponent<Image>().color.a <= 0 || charData.swipeLifes == 0)
             {
+                if (charData.swipeLifes != 0) obsData.RestoreSpeed();
+                charData.swipeLifes = 3;
                 charData.shooting = false;
                 GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
                 Destroy(charData.shootingBall);
-                obsData.RestoreSpeed();
                 for (int i = 0; i < swipeArr.Length; i++) swipeArr[i].GetComponent<Image>().color = new Color(swipeArr[i].GetComponent<Image>().color.r, swipeArr[i].GetComponent<Image>().color.g, swipeArr[i].GetComponent<Image>().color.b, 1);
                 for (int i = 0; i < swipeArr.Length; i++) swipeArr[i].transform.localScale = new Vector3(0, 1, 1);
             }
