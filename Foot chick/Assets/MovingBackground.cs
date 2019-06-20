@@ -19,10 +19,16 @@ public class MovingBackground : MonoBehaviour
     {
         if (!GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().gameEnded)
         {
-            if (GameObject.Find("Points").GetComponent<PointFixer>().points >= level * 100)
+            if (GameObject.Find("Points").GetComponent<PointFixer>().points >= level * 150)
             {
                 level++;
-                if (level == 4) GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
+                if (level == 4 && PlayerPrefs.GetInt("End", 0) == 0)
+                {
+                    PlayerPrefs.SetInt("End", 1);
+                    PlayerPrefs.SetInt("Record", GameObject.Find("Points").GetComponent<PointFixer>().points);
+
+                    GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
+                }
                 else GetComponent<SpriteRenderer>().sprite = backgrounds[level - 1];
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speedAum += 0.1f;
