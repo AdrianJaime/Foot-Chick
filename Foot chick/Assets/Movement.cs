@@ -47,7 +47,6 @@ public class Movement : MonoBehaviour
                     }
                     if (swipe.phase == TouchPhase.Ended)
                     {
-                        Destroy(actualTrail);
                         end = swipe.position;
                     }
                     swipeDist = end - start;
