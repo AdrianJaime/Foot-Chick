@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
     public Sprite[] swipeAnimations, swipeLifesSprites;
-    public GameObject shootingBall, swipeLifesImage;
+    public GameObject shootingBall, swipeLifesImage, trail, actualTrail;
     public int swipeLifes, changedSL;
 
     // Start is called before the first frame update
@@ -40,10 +40,14 @@ public class Movement : MonoBehaviour
                 {
                     if (swipe.phase == TouchPhase.Began)
                     {
+                        actualTrail = Instantiate(trail, cam.ScreenToWorldPoint(new Vector3(swipe.position.x, swipe.position.y, dist)), new Quaternion(0,0,0,0));
+
+                        actualTrail.transform.position = new Vector3(actualTrail.transform.position.x, actualTrail.transform.position.y, 0);
                         end = start = swipe.position;
                     }
                     if (swipe.phase == TouchPhase.Ended)
                     {
+                        Destroy(actualTrail);
                         end = swipe.position;
                     }
                     swipeDist = end - start;
@@ -53,6 +57,8 @@ public class Movement : MonoBehaviour
                         CheckIfCorrect(swipeDist);
                     }
                 }
+                actualTrail.transform.position = cam.ScreenToWorldPoint(new Vector3(swipe.position.x, swipe.position.y, dist));
+                actualTrail.transform.position = new Vector3(actualTrail.transform.position.x, actualTrail.transform.position.y, 0);
             }
 
             //Al final resetear speed en ObstacleGenerator
