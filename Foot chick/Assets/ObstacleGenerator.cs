@@ -27,7 +27,7 @@ public class ObstacleGenerator : MonoBehaviour
     {
         if (gameStarted)
         {
-            if (!GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().shooting) speed += Time.deltaTime * speedAum;
+            if (!GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().shooting && !GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().paused) speed += Time.deltaTime * speedAum;
             else if(savedSpeed == 0){
                 savedSpeed = speed;
                 speed = 0;

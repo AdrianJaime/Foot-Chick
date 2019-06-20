@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     private Camera cam;
     private Vector3 firstCharacterPos, screenPos, move, firstFingerPos, endFingerPos, camFirstPos, limits, cameraLimits;
     private float dist, dragDistance;
-    public bool shooting = false, released = false;
+    public bool shooting = false, released = false, paused = false;
     Vector2 start = Vector2.zero, end = Vector2.zero, swipeDist = Vector2.zero;
     public List<int> swipeList;
     public Sprite[] swipeAnimations, swipeLifesSprites;
@@ -27,7 +27,8 @@ public class Movement : MonoBehaviour
     void Update()
     {
         //Chutando balón
-        if (shooting)
+        if (paused) ;
+        else if (shooting)
         {
             if (swipeLifes != changedSL) swipeLifesChange();
             if (Input.touchCount > 0)
@@ -57,7 +58,7 @@ public class Movement : MonoBehaviour
             //Al final resetear speed en ObstacleGenerator
         }
         //Control de movimiento del dedo sobre la pantalla
-        else if (Input.touchCount > 0 )
+        else if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             screenPos = cam.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, dist));
