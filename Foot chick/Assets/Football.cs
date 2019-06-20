@@ -7,6 +7,7 @@ public class Football : MonoBehaviour
     float width, height;
     Camera cam;
     ObstacleGenerator obsData;
+    Vector3 rotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,7 @@ public class Football : MonoBehaviour
         cam = obsData.cam;
         Vector2 pos = searchPosition();
         gameObject.transform.position = new Vector3(pos.x, pos.y, 15);
+        rotation = new Vector3(Random.rotation.x, Random.rotation.y, 0);
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Football : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed);
         if (gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
         if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject) Destroy(gameObject);
+        transform.Rotate(rotation);
     }
 
     Vector2 searchPosition()
