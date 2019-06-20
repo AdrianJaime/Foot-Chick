@@ -168,8 +168,8 @@ MonoBehaviour:
   - {fileID: 2728645311872457581, guid: 291a10b52a158c14c8a05aee4857d4f1, type: 3}
   Items:
   - {fileID: 7969702019060606917, guid: 7dd25faae4fcc3541ad64df9fc088f22, type: 3}
-  speed: 7
-  speedAum: 0.1
+  speed: 5
+  speedAum: 0.2
   start_time: 0
   cam: {fileID: 1279586233}
   gameStarted: 0

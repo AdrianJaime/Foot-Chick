@@ -22,7 +22,11 @@ public class MovingBackground : MonoBehaviour
             if (GameObject.Find("Points").GetComponent<PointFixer>().points >= level * 100)
             {
                 level++;
-                GetComponent<SpriteRenderer>().sprite = backgrounds[level - 1];
+                if (level == 4) GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
+                else GetComponent<SpriteRenderer>().sprite = backgrounds[level - 1];
+                GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
+                GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speedAum += 0.1f;
+                
             }
         }
         if (Input.touchCount > 0)
