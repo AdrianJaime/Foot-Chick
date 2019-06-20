@@ -25,7 +25,6 @@ public class ObstacleGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(speed);
         if (gameStarted)
         {
             if (!GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().shooting) speed += Time.deltaTime * speedAum;

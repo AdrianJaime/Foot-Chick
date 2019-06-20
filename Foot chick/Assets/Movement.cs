@@ -86,8 +86,6 @@ public class Movement : MonoBehaviour
     {
         limits = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height / 4 * 3, dist));
         cameraLimits = new Vector3(limits.x / 5, limits.y / 5, 0);
-        Debug.Log(limits);
-        Debug.Log(cameraLimits);
     }
 
     void Move()
@@ -206,7 +204,6 @@ public class Movement : MonoBehaviour
         }
         if (length > swipeList.Count)
         {
-            Debug.Log("Set");
             GameObject.Find("Swipe Container").GetComponent<Swipes>().setSwipes(true);
             if (swipeList.Count == 0)
             {

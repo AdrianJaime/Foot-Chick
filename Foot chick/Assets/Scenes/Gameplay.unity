@@ -168,8 +168,8 @@ MonoBehaviour:
   - {fileID: 2728645311872457581, guid: 291a10b52a158c14c8a05aee4857d4f1, type: 3}
   Items:
   - {fileID: 7969702019060606917, guid: 7dd25faae4fcc3541ad64df9fc088f22, type: 3}
-  speed: 5
-  speedAum: 0.2
+  speed: 7
+  speedAum: 0.1
   start_time: 0
   cam: {fileID: 1279586233}
   gameStarted: 0
@@ -1130,9 +1130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9969aab2fac1e4e9ed097a0b260a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 0.0003
+  smooth: 1
   dist: 0
   cam: {fileID: 1279586233}
+  backgrounds:
+  - {fileID: 21300000, guid: 7e24b562ba350734d80b3554e22dd968, type: 3}
+  - {fileID: 21300000, guid: 222af7dde4c8e43419cecdd74696f021, type: 3}
+  - {fileID: 21300000, guid: 07c90cd3f847edb48a927e4f3db5111e, type: 3}
 --- !u!1 &673527122
 GameObject:
   m_ObjectHideFlags: 0

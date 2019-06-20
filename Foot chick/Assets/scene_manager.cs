@@ -8,8 +8,7 @@ public class scene_manager : MonoBehaviour
     public GameObject[] menus; // 0 = menú, 1 = settings
 
     public void ChangeScene(string scene)
-    {
-        Debug.Log(PlayerPrefs.GetInt("Tutorial", 0));
+    { 
         if(scene == "Gameplay" && PlayerPrefs.GetInt("Tutorial", 0) == 0) SceneManager.LoadScene("Cinematics");
         else SceneManager.LoadScene(scene);
     }

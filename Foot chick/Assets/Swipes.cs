@@ -29,7 +29,11 @@ public class Swipes : MonoBehaviour
         {
             if (swipeArr[0].GetComponent<Image>().color.a <= 0 || charData.swipeLifes == 0)
             {
-                if (charData.swipeLifes != 0) obsData.RestoreSpeed();
+                if (charData.swipeLifes != 0)
+                {
+                    obsData.RestoreSpeed();
+                    GameObject.FindGameObjectWithTag("Character").GetComponent<Movement>().swipeLifesImage.transform.localScale = new Vector3(0, 1, 1);
+                }
                 charData.swipeLifes = 3;
                 charData.shooting = false;
                 GameObject.Find("Heart Container").GetComponent<LifeManager>().LoseLife();
