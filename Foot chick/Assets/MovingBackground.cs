@@ -9,6 +9,7 @@ public class MovingBackground : MonoBehaviour
     public Camera cam;
     public Sprite[] backgrounds;
     int level = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +23,26 @@ public class MovingBackground : MonoBehaviour
             if (GameObject.Find("Points").GetComponent<PointFixer>().points >= level * 150)
             {
                 level++;
-                if (level == 4 && PlayerPrefs.GetInt("End", 0) == 0)
-                {
-                    PlayerPrefs.SetInt("End", 1);
-                    PlayerPrefs.SetInt("Record", GameObject.Find("Points").GetComponent<PointFixer>().points);
+                if (level == 4) {
+                    if (PlayerPrefs.GetInt("End", 0) == 0)
+                    {
+                        PlayerPrefs.SetInt("End", 1);
+                        PlayerPrefs.SetInt("Record", GameObject.Find("Points").GetComponent<PointFixer>().points);
 
-                    GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
+                        GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
+                    }
                 }
-                else GetComponent<SpriteRenderer>().sprite = backgrounds[level - 1];
-                GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
-                GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speedAum += 0.1f;
-                
+                if (PlayerPrefs.GetInt("End", 0) != 0)
+                {
+                    if (level % 1 == 0)
+                        GetComponent<SpriteRenderer>().sprite = backgrounds[0];
+                    if (level % 2 == 0)
+                        GetComponent<SpriteRenderer>().sprite = backgrounds[1];
+                    if (level % 3 == 0)
+                        GetComponent<SpriteRenderer>().sprite = backgrounds[2];
+                    GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speed = 5;
+                    GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().speedAum += 0.1f;
+                }
             }
         }
         if (Input.touchCount > 0)
