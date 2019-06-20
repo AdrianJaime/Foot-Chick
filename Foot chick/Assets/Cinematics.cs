@@ -22,7 +22,7 @@ public class Cinematics : MonoBehaviour
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0, Screen.width * 2, 0), Time.deltaTime * textSpeed);
 
         if (PlayerPrefs.GetInt("Tutorial", 0) == 0 && transform.localPosition.y == Screen.width * 2) SceneManager.LoadScene("Gameplay");
-        else SceneManager.LoadScene("Main Menu");
+        else if(transform.localPosition.y == Screen.width * 2) SceneManager.LoadScene("Main Menu");
 
     }
 }

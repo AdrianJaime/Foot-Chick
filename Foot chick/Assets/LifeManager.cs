@@ -8,7 +8,9 @@ public class LifeManager : MonoBehaviour
     public int lifes;
     public Sprite lostLife, fullLife;
     public GameObject[] screen;
-    public GameObject newRecord, pointsResult;
+    public GameObject newRecord, pointsResult; 
+    public InputField inputField;
+    public bool godMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +23,12 @@ public class LifeManager : MonoBehaviour
     }
     public void LoseLife()
     {
-        GameObject.Find("Heart " + lifes).GetComponent<Image>().sprite = lostLife;
-        lifes--;
-        if (lifes == 0) Die();
+        if (!godMode)
+        {
+            GameObject.Find("Heart " + lifes).GetComponent<Image>().sprite = lostLife;
+            lifes--;
+            if (lifes == 0) Die();
+        }
     }
 
 
@@ -50,5 +55,13 @@ public class LifeManager : MonoBehaviour
         screen[0].SetActive(false);
         screen[1].SetActive(true);
         GameObject.Find("ResultPoints").GetComponent<PointsResult>().ResultPoints();
+    }
+    public void activateGod()
+    {
+        string text = inputField.text;
+        if (text == "god")
+            godMode = true;
+        if (text == "mortal")
+            godMode = false;
     }
 }
