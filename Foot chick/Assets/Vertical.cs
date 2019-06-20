@@ -31,7 +31,7 @@ public class Vertical : MonoBehaviour
         if (gameObject.transform.position.z < 0) gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -obsData.speed * 5);
         if (gameObject.transform.position.z < -10 && gameObject != obsData.lastObject)
         {
-            GameObject.Find("Points").GetComponent<PointFixer>().points++;
+            GameObject.Find("Points").GetComponent<PointFixer>().AddPoints(1);
             GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
             Destroy(gameObject);
         }

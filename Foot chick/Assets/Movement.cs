@@ -56,8 +56,11 @@ public class Movement : MonoBehaviour
                         CheckIfCorrect(swipeDist);
                     }
                 }
-                actualTrail.transform.position = cam.ScreenToWorldPoint(new Vector3(swipe.position.x, swipe.position.y, dist));
-                actualTrail.transform.position = new Vector3(actualTrail.transform.position.x, actualTrail.transform.position.y, 0);
+                if (actualTrail != null)
+                {
+                    actualTrail.transform.position = cam.ScreenToWorldPoint(new Vector3(swipe.position.x, swipe.position.y, dist));
+                    actualTrail.transform.position = new Vector3(actualTrail.transform.position.x, actualTrail.transform.position.y, 0);
+                }
             }
 
             //Al final resetear speed en ObstacleGenerator
@@ -215,9 +218,9 @@ public class Movement : MonoBehaviour
             {
                 shooting = false;
                 GameObject.Find("Obstacles").GetComponent<ObstacleGenerator>().RestoreSpeed();
-                if (swipeLifes == 3) GameObject.Find("Points").GetComponent<PointFixer>().points += 5;
-                else if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().points += 2;
-                else if(swipeLifes == 1)GameObject.Find("Points").GetComponent<PointFixer>().points++;
+                if (swipeLifes == 3) GameObject.Find("Points").GetComponent<PointFixer>().AddPoints(5);
+                else if (swipeLifes == 2) GameObject.Find("Points").GetComponent<PointFixer>().AddPoints(2);
+                else if(swipeLifes == 1)GameObject.Find("Points").GetComponent<PointFixer>().AddPoints(1);
                 GameObject.Find("Points").GetComponent<PointFixer>().UpdatePoints();
                 Destroy(shootingBall);
                 swipeLifesImage.transform.localScale = new Vector3(0, 1, 1);
