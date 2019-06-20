@@ -23,7 +23,7 @@ public class MovingBackground : MonoBehaviour
             if (GameObject.Find("Points").GetComponent<PointFixer>().points >= level * 150)
             {
                 level++;
-                if (level == 4) {
+                if (level == 3) {
                     if (PlayerPrefs.GetInt("End", 0) == 0)
                     {
                         PlayerPrefs.SetInt("End", 1);
@@ -32,7 +32,7 @@ public class MovingBackground : MonoBehaviour
                         GameObject.Find("SceneManager").GetComponent<scene_manager>().ChangeScene("Cinematics");
                     }
                 }
-                if (PlayerPrefs.GetInt("End", 0) != 0)
+                if (PlayerPrefs.GetInt("End", 1) != 0)
                 {
                     if (level % 1 == 0)
                         GetComponent<SpriteRenderer>().sprite = backgrounds[0];
